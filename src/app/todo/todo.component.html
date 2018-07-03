@@ -4,10 +4,34 @@
   </div>
   <div class="col-lg-12">
     <div class="col-lg-12 head1">
-        <h2>Inbox</h2>
+      <div class="col-lg-8">
+          <h2>Inbox</h2>
+
+      </div>
+      <div class="col-lg-4">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sort By
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="#">HTML</a></li>
+                <li><a href="#">CSS</a></li>
+                <li><a href="#">JavaScript</a></li>
+              </ul>
+      </div>
       </div>
       <div class="col-lg-12">
          <input type="text" placeholder="Add a to-do.." [(ngModel)]="todo" (click)="addTodo()"> 
         </div>
+        <div class="list col-lg-12" >
+        <div class="col-lg-12 list_div"*ngFor="let n of list" >
+          <div class="col-lg-1" >
+              <label class="input_container">
+                  <input type="checkbox">
+                </label>
+          </div>
+          <div class="col-lg-11">
+             <h5>{{n}}</h5> 
+          </div>
+        </div>
+      </div>
   </div>
 </div>
