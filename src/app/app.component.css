@@ -1,4 +1,5 @@
 .container{
     height:1000px;
-
+    width:100%;
+    background-image : url("http://www.valuefy.com/assets/images/banner-one.jpg");
 }

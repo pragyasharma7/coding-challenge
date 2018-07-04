@@ -1,37 +1,68 @@
 <div class="container">
   <div class="col-lg-12 box">
-<h1>To Do App</h1>
+    <h1 class="heading">To Do App</h1>
   </div>
   <div class="col-lg-12">
     <div class="col-lg-12 head1">
       <div class="col-lg-8">
-          <h2>Inbox</h2>
+        <h2>Inbox</h2>
 
       </div>
       <div class="col-lg-4">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sort By
-              <span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                <li><a href="#">HTML</a></li>
-                <li><a href="#">CSS</a></li>
-                <li><a href="#">JavaScript</a></li>
-              </ul>
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Options
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a (click)="sortAtoZ()">Sort A-Z</a>
+          </li>
+          <li>
+            <a (click)="clearList()">Clear List</a>
+          </li>
+        </ul>
       </div>
-      </div>
-      <div class="col-lg-12">
-         <input type="text" placeholder="Add a to-do.." [(ngModel)]="todo" (click)="addTodo()"> 
+    </div>
+    <div class="col-lg-12">
+      <input type="text" placeholder="Add a to-do.." [(ngModel)]="todo" (keyup.enter)="addTodo()">
+    </div>
+    <div class="list col-lg-12">
+      <div class="col-lg-12 list_div" *ngFor="let n of list; let i of index">
+        <div class="col-lg-1">
+          <input type="checkbox" id="fruit1{{i}}" (change)="checkbox($event,n)" name="" [value]="n">
+          <label for="fruit1{{i}}"></label>
+
         </div>
-        <div class="list col-lg-12" >
-        <div class="col-lg-12 list_div"*ngFor="let n of list" >
-          <div class="col-lg-1" >
-              <label class="input_container">
-                  <input type="checkbox">
-                </label>
-          </div>
-          <div class="col-lg-11">
-             <h5>{{n}}</h5> 
-          </div>
+        <div class="col-lg-11">
+          <h6>{{n}}</h6>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!--Modal content-->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h1>ToDo App List</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img class="logo_img" src="assets/img/logo-hd-one.png" alt="logo">
+
+        <h3>Especially designed for Valuefy employees.</h3>
+        <h5>Type the task and hit enter to add in the list.</h5>
+        <h5>Tick to delete finished task from the list.</h5>
+      </div>
+
+    </div>
+
   </div>
 </div>

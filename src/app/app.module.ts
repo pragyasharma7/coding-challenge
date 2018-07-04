@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { ToDoService } from 'app/services/todo.service';
 import { LocalStorage } from 'app/services/localstorage.service';
 import { AppComponent } from './app.component';
 import { TodoComponent } from './todo/todo.component';
@@ -17,8 +16,7 @@ import { TodoComponent } from './todo/todo.component';
     FormsModule,
     HttpModule
   ],
-  providers: [LocalStorage,
-  ToDoService],
+  providers: [LocalStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

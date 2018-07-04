@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ToDoService} from 'app/services/todo.service';
 import { LocalStorage } from 'app/services/localstorage.service';
+import * as _ from 'lodash';
+declare const $: any;
 
 @Component({
   selector: 'app-todo',
@@ -8,29 +9,70 @@ import { LocalStorage } from 'app/services/localstorage.service';
   styleUrls: ['./todo.component.css']
 })
 export class TodoComponent implements OnInit {
-  public todo:string;
-  public arr :string;
-  public list:string[] ;
-   public a = this._localstorage.getItem('list');
-  constructor(private _localstorage:LocalStorage,
-              private _todos: ToDoService) {
-              
-   }
+  public todo: string;
+  public list: any;
+  public arr;
+  public check;
+  audio: HTMLAudioElement; //for including audios
+  constructor(private _localstorage: LocalStorage,
+  ) {
+
+  }
 
   ngOnInit() {
-    this.list=this._localstorage.list;
-    this.list.push(this.a)
+    this.list_initialize();
+    $('#myModal').modal('show'); // to open introduction modal
   }
-  addTodo(){
-   // this.arr = new Array("Mary","Tom","Jack","Jill") ;
-      this.list.push(this.todo);
-      console.log(this.list, this.todo)
-   // this.arr.push(this.todo);
-this._localstorage.setItem('list', JSON.stringify(this.list))
-this.todo='';
+  addTodo() {                   // this will add task into local storage
+    if (this.todo) {
+      if (this.arr) {
+        this.list = this.arr;
+        this.list.push(this.todo)
+      } else {
+        this.list_initialize();
+        this.list.push(this.todo)
+      }
+
+      this._localstorage.setItem('list', JSON.stringify(this.list))
+      this.todo = '';                       // to reset the task's value after its been added in the list
+
+    }
   }
-  ngDoCheck(){
-  
-     console.log(this.a)
+  sortAtoZ() {
+    this.list = _.sortBy(this.list);              // sort the list from A to Z
+  }
+  clearList() {
+    this.arr = this._localstorage.clear();        // clear the list 
+    this.list = this.arr;
+    this.playdClearAudio();                       // play audio when list has been cleared
+  }
+
+  checkbox(event, n) {
+    if (event.target.checked) {
+      const index: number = this.list.indexOf(n);
+
+      this.list.splice(index, 1);
+      this.playdeleteAudio();                         // play audio when task is deleted
+      this._localstorage.setItem('list', JSON.stringify(this.list))
+    }
+  }
+  list_initialize() {
+    this.arr = JSON.parse(this._localstorage.getItem('list'));
+    this.list = this.arr;
+    if (this.arr == null) {
+      this.list = [];
+    }
+  }
+  playdeleteAudio() {
+    this.audio = new Audio();
+    this.audio.src = "assets/sound/to-the-point.ogg";
+    this.audio.load();
+    this.audio.play();
+  }
+  playdClearAudio() {
+    this.audio = new Audio();
+    this.audio.src = "assets/sound/trash.wav";
+    this.audio.load();
+    this.audio.play();
   }
 }
