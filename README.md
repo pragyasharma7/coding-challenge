@@ -1,3 +1,13 @@
+# To clone
+
+This project has been made in angular v5.2.11 and angular cli v6.0.8 and node v10.4.1
+
+Please clone the code by using https://github.com/pragyasharma7/coding-challenge.git and run npm install.
+
+#Start
+
+To run the code use angular cli 'npm start' which will run it on `http://localhost:4200/`.
+
 # CodingChallenge
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
